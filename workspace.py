@@ -12,8 +12,10 @@ try:
 	import urllib.request
 
 	# aisaka/ bluemoon/ earth/ honeycomb/ hoshino/ hoshino2/ naisho
-	if not os.path.exists('./wallpaper.jpg'):
-		imgURL = 'http://small.23jhj.com/Zzajang-bro/workspace/wallpapers/earth.jpg'
+	# if not os.path.exists('./wallpaper.jpg'):
+	bgNm = 'blueMoon'
+	if True:
+		imgURL = f'http://small.23jhj.com/Zzajang-bro/workspace/wallpapers/{bgNm}.jpg'
 		urllib.request.urlretrieve(imgURL, "./wallpaper.jpg")
 
 	import pygame
