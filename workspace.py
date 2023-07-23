@@ -1,40 +1,66 @@
-import os
-os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+import traceback
 
-import pygame
-import pygame.gfxdraw
-import pygame.freetype
 
-pygame.init()
-screen = pygame.display.set_mode((0,0))
-clock = pygame.time.Clock()
+try:
+	import ctypes
+	myappid = 'mycompany.myproduct.subproduct.version' # arbitrary string
+	ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+	
+	import os
+	os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 
-pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0))
+	import urllib.request
 
-D2 = pygame.freetype.SysFont('D2Coding', 12)
+	# aisaka/ bluemoon/ earth/ honeycomb/ hoshino/ hoshino2/ naisho
+	if not os.path.exists('./wallpaper.jpg'):
+		imgURL = 'http://small.23jhj.com/Zzajang-bro/workspace/wallpapers/earth.jpg'
+		urllib.request.urlretrieve(imgURL, "./wallpaper.jpg")
 
-def draw():
-	pass
+	import pygame
+	import pygame.gfxdraw
+	import pygame.freetype
 
-mouseX, mouseY = 0, 0
+	pygame.init()
+	screen = pygame.display.set_mode((0,0))
+	clock = pygame.time.Clock()
 
-while True:
+	pygame.display.set_caption('Zzajang-bro workspace')
+	pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0))
 
-	quitMsgFlag = False
-	for e in pygame.event.get():
-		if e.type == pygame.QUIT:
-			quitMsgFlag = True
-		else:
-			if e.type == pygame.MOUSEMOTION:
-				mouseX, mouseY = e.pos
-			pass
-	if quitMsgFlag:
-		break
+	D2 = pygame.freetype.SysFont('D2Coding', 12)
 
-	screen.fill((30,30,30))
-	pygame.gfxdraw.rectangle(screen, (mouseX, mouseY, 10, 10), (123,123,123))
-	D2.render_to(screen, (50,50), 'wow', fgcolor=(255,255,255), size=12)
+	bg = pygame.transform.scale( pygame.image.load('./wallpaper.jpg'), screen.get_size() )
+	pygame.gfxdraw.box(bg, ((0,0),bg.get_size()), (0,0,0,120))
 
-	clock.tick(60)
-	pygame.display.flip()
-pygame.quit()
+	icon = pygame.image.load('Zzajang_bro.logo.png')
+	pygame.display.set_icon(icon)
+
+	def draw():
+		pass
+
+	mouseX, mouseY = 0, 0
+
+	while True:
+
+		quitMsgFlag = False
+		for e in pygame.event.get():
+			if e.type == pygame.QUIT:
+				quitMsgFlag = True
+			else:
+				if e.type == pygame.MOUSEMOTION:
+					mouseX, mouseY = e.pos
+				pass
+		if quitMsgFlag:
+			break
+
+		screen.blit(bg, (0,0) )
+		pygame.gfxdraw.rectangle(screen, (mouseX, mouseY, 10, 10), (123,123,123))
+		D2.render_to(screen, (50,50), 'wow', fgcolor=(255,255,255), size=12)
+
+		clock.tick(60)
+		pygame.display.flip()
+	pygame.quit()
+
+except:
+	print(traceback.format_exc())
+	input()
