@@ -5,7 +5,7 @@ try:
 	import ctypes
 	myappid = 'mycompany.myproduct.subproduct.version' # arbitrary string
 	ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
-	
+
 	import os
 	os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 
@@ -32,13 +32,18 @@ try:
 	bg = pygame.transform.scale( pygame.image.load('./wallpaper.jpg'), screen.get_size() )
 	pygame.gfxdraw.box(bg, ((0,0),bg.get_size()), (0,0,0,120))
 
-	icon = pygame.image.load('Zzajang_bro.logo.png')
+	icon = pygame.image.load('./res/Zzajang_bro.logo.png')
 	pygame.display.set_icon(icon)
+
+	folderIcon = pygame.transform.scale( pygame.image.load('./res/folder.png'), (48,48) )
 
 	def draw():
 		pass
 
 	mouseX, mouseY = 0, 0
+
+	closeButtonX = 1060
+	closeButtonY = 10
 
 	while True:
 
@@ -54,8 +59,9 @@ try:
 			break
 
 		screen.blit(bg, (0,0) )
+		screen.blit(folderIcon, (50,50))
 		pygame.gfxdraw.rectangle(screen, (mouseX, mouseY, 10, 10), (123,123,123))
-		D2.render_to(screen, (50,50), 'wow', fgcolor=(255,255,255), size=12)
+		D2.render_to(screen, (50,100), '새 창 열기', fgcolor=(255,255,255), size=12)
 
 		clock.tick(60)
 		pygame.display.flip()
