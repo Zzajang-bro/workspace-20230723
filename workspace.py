@@ -11,7 +11,7 @@ try:
 
 	import urllib.request
 
-	# aisaka/ bluemoon/ earth/ honeycomb/ hoshino/ hoshino2/ naisho
+	# aisaka/ blueMoon/ earth/ honeycomb/ hoshino/ hoshino2/ naisho
 	# if not os.path.exists('./wallpaper.jpg'):
 	bgNm = 'blueMoon'
 	if True:
@@ -56,14 +56,22 @@ try:
 			else:
 				if e.type == pygame.MOUSEMOTION:
 					mouseX, mouseY = e.pos
-				pass
+
 		if quitMsgFlag:
 			break
 
 		screen.blit(bg, (0,0) )
 		screen.blit(folderIcon, (50,50))
 		pygame.gfxdraw.rectangle(screen, (mouseX, mouseY, 10, 10), (123,123,123))
-		D2.render_to(screen, (50,100), '새 창 열기', fgcolor=(255,255,255), size=12)
+		#D2.render_to(screen, (50,100), '새 창 열기', fgcolor=(255,255,255), size=12)
+
+		x = []
+		for i in range(len(pygame.key.get_pressed())):
+			if pygame.key.get_pressed()[i]:
+				x.append(i)
+		#x = [ 'T' if b else 'F' for b in pygame.key.get_pressed()]
+		D2.render_to(screen, (50, 120), str(x), fgcolor=(255,255,255), size=12)
+		# D2.render_to(screen, (50, 130), pygame.K_a, fgcolor=(255,255,255), size=12)
 
 		clock.tick(60)
 		pygame.display.flip()
