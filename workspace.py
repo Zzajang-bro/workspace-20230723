@@ -29,7 +29,7 @@ try:
 	pygame.display.set_caption('Zzajang-bro workspace')
 	pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0))
 
-	D2 = pygame.freetype.SysFont('D2Coding', 12)
+	D2 = pygame.freetype.SysFont('Neo둥근모', 12)
 
 	bg = pygame.transform.scale( pygame.image.load('./wallpaper.jpg'), screen.get_size() )
 	pygame.gfxdraw.box(bg, ((0,0),bg.get_size()), (0,0,0,120))
